@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+		<TargetFrameworks>net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>RandomRepo</Title>
+		<Version>1.0.0</Version>
+		<Authors>Random Dude</Authors>
+		<Description>A simple library which implements the Repository patttern.</Description>
+		<Copyright>MIT</Copyright>
+		<RepositoryUrl>https://github.com/RumenZaechki/DotNetStuff/tree/main/RandomRepo</RepositoryUrl>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

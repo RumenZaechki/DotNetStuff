@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "ChainOfIrresponsibi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MeditatR", "MeditatR", "{23042F34-7035-4466-9A15-2D7C0A4CCAB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeditatR", "MeditatR\MeditatR\MeditatR.csproj", "{24B7C766-445D-433D-A639-3A26DB768551}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomMediator", "MeditatR\MeditatR\RandomMediator.csproj", "{24B7C766-445D-433D-A639-3A26DB768551}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeditatR.Tests", "MeditatR\MeditatR.Tests\MeditatR.Tests.csproj", "{A5EA7218-CD4B-40AF-9997-16F25EA8D67F}"
 EndProject

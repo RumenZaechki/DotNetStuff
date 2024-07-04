@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\MeditatR\MeditatR.csproj" />
+		<ProjectReference Include="../MeditatR/RandomMediator.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
