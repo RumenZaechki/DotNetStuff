@@ -35,7 +35,7 @@ For any data set that you'll make queries for, you'll need to make an interface 
     }
 ```
 
-The class also inherits the `Repository` abstract class, which uses the given `DbContext` to make queries. Once this has been done, you could inject it in whatever class you need and make queries with it: 
+The class also inherits the `Repository` abstract class, which uses the given `DbContext` to make queries. The newly added interface and class should be registered in the DI container. Once this has been done, you could inject it in whatever class you need and make queries with it: 
 
 ``` c#
 public class UserService
