@@ -8,13 +8,13 @@ namespace MeditatR
     {
         public static void AddMeditatR(this IServiceCollection services, string @namespace)
         {
-            services.AddScoped<IMediator, Mediator>();
+            services.AddSingleton<IMediator, Mediator>();
 
             var assemblies = DependencyContext.Default!.GetDefaultAssemblyNames().Where(assembly => assembly.FullName.StartsWith(@namespace)).Select(Assembly.Load);
 
             var types = assemblies.SelectMany(assembly => assembly.GetTypes()).ToList();
 
-            types.Where(type => type.GetInterfaces().Any(IsHandler)).ToList().ForEach(type => type.GetInterfaces().Where(IsHandler).ToList().ForEach(@interface => services.AddScoped(@interface, type)));
+            types.Where(type => type.GetInterfaces().Any(IsHandler)).ToList().ForEach(type => type.GetInterfaces().Where(IsHandler).ToList().ForEach(@interface => services.AddSingleton(@interface, type)));
 
             return;
 
