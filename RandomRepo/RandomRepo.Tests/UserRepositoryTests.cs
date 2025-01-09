@@ -30,7 +30,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             });
-
+            _context.SaveChanges();
             // Assert
             var user = _context.Users.FirstOrDefault(u => u.Username == "Test");
             Assert.True(result == user);
@@ -57,6 +57,7 @@ namespace RandomRepo.Tests
                     Username = "Test2"
                 }
             });
+            _context.SaveChanges();
 
             // Assert
             var users = _context.Users.ToArray();
@@ -77,6 +78,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             });
+            _context.SaveChanges();
 
             // Assert
             Assert.Equal(repo.Find(u => u.Id == 1), _context.Users.Where(u => u.Id == 1));
@@ -111,6 +113,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             });
+            _context.SaveChanges();
 
             // Assert
             Assert.Equal(repo.GetFirst(u => u.Id == 1), _context.Users.First(u => u.Id == 1));
@@ -126,10 +129,12 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             });
+            _context.SaveChanges();
 
             // Act
             result.Username = "Test1234";
             repo.Update(result);
+            _context.SaveChanges();
 
             // Assert
             Assert.Equal("Test1234", _context.Users.FirstOrDefault().Username);
@@ -154,6 +159,7 @@ namespace RandomRepo.Tests
                 }
             };
             var result = repo.AddRange(users);
+            _context.SaveChanges();
 
             // Act
             result.FirstOrDefault().Username = "Test1234";
@@ -175,9 +181,11 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             });
+            _context.SaveChanges();
 
             // Act
             var res = repo.Remove(result);
+            _context.SaveChanges();
 
             // Assert
             Assert.True(res);
@@ -203,9 +211,11 @@ namespace RandomRepo.Tests
                 }
             };
             var result = repo.AddRange(users);
+            _context.SaveChanges();
 
             // Act
             var res = repo.RemoveRange(result);
+            _context.SaveChanges();
 
             // Assert
             Assert.True(res);

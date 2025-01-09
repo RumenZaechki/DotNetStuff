@@ -8,92 +8,67 @@ namespace RandomRepo
         where TEntity : class
         where TContext : DbContext
     {
+        private readonly DbSet<TEntity> _entity;
         protected readonly TContext Context;
 
         protected Repository(TContext dbContext)
         {
             Context = dbContext;
+            _entity = Context.Set<TEntity>();
         }
 
 
         public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> filter)
         {
-            return Context
-                          .Set<TEntity>()
+            return _entity
                           .Where(filter)
                           .ToList();
         }
 
         public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> filter)
         {
-            return Context.Set<TEntity>()
-                          .FirstOrDefault(filter);
+            return _entity.FirstOrDefault(filter);
         }
 
         public TEntity GetFirst(Expression<Func<TEntity, bool>> filter)
         {
-            return Context
-                          .Set<TEntity>()
-                          .First(filter);
+            return _entity.First(filter);
         }
 
         public virtual TEntity Add(TEntity entity)
         {
-            Context
-                .Set<TEntity>()
-                .Add(entity);
-            Context.SaveChanges();
-
+            _entity.Add(entity);
             return entity;
         }
 
         public virtual TEntity[] AddRange(IEnumerable<TEntity> entities)
         {
-            Context
-                .Set<TEntity>()
-                .AddRange(entities);
-            Context.SaveChanges();
-
+            _entity.AddRange(entities);
             return entities.ToArray();
         }
 
         public virtual bool Update(TEntity entity)
         {
-            Context
-                .Set<TEntity>()
-                .Attach(entity);
-            Context.Entry(entity).State = EntityState.Modified;
-            return Context.SaveChanges() > 0;
+            _entity.Update(entity);
+            return Context.Entry(entity).State == EntityState.Modified;
         }
 
         public virtual bool UpdateRange(IEnumerable<TEntity> entities)
         {
-            Context
-                .Set<TEntity>()
-                .AttachRange(entities);
-            foreach (TEntity entity in entities)
-            {
-                Context.Entry(entity).State = EntityState.Modified;
-            }
-            return Context.SaveChanges() > 0;
+            _entity.UpdateRange(entities);
+            return entities.Any(e => Context.Entry(e).State == EntityState.Modified);
         }
 
         public virtual bool Remove(TEntity entity)
         {
-            Context
-                .Set<TEntity>()
-                .Remove(entity);
-
-            return Context.SaveChanges() > 0;
+            _entity.Remove(entity);
+            return Context.Entry(entity).State == EntityState.Deleted;
         }
 
         public virtual bool RemoveRange(IEnumerable<TEntity> entities)
         {
-            Context
-                .Set<TEntity>()
-                .RemoveRange(entities);
-
-            return Context.SaveChanges() > 0;
+            _entity.RemoveRange(entities);
+            return entities.Any(e => Context.Entry(e).State == EntityState.Deleted);
         }
     }
 }

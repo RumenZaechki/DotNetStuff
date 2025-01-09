@@ -29,6 +29,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == "Test");
@@ -56,6 +57,7 @@ namespace RandomRepo.Tests
                     Username = "Test2"
                 }
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             var users = await _context.Users.ToArrayAsync();
@@ -76,6 +78,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.Equal(await repo.FindAsync(u => u.Id == 1, new CancellationToken()), _context.Users.Where(u => u.Id == 1));
@@ -93,6 +96,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.Equal(await repo.GetSingleAsync(u => u.Id == 1, new CancellationToken()), _context.Users.FirstOrDefault(u => u.Id == 1));
@@ -110,6 +114,7 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.Equal(await repo.GetFirstAsync(u => u.Id == 1, new CancellationToken()), _context.Users.First(u => u.Id == 1));
@@ -125,10 +130,12 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Act
             result.Username = "Test1234";
             await repo.UpdateAsync(result, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.Equal("Test1234", _context.Users.FirstOrDefault().Username);
@@ -153,11 +160,13 @@ namespace RandomRepo.Tests
                 }
             };
             var result = await repo.AddRangeAsync(users, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Act
             result.FirstOrDefault().Username = "Test1234";
             result.LastOrDefault().Username = "Test5678";
             await repo.UpdateRangeAsync(result, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             var first = await repo.GetFirstAsync(u => u.Id == 1, new CancellationToken());
             var second = await repo.GetFirstAsync(u => u.Id == 2, new CancellationToken());
@@ -177,9 +186,11 @@ namespace RandomRepo.Tests
                 Id = 1,
                 Username = "Test",
             }, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Act
             var res = await repo.RemoveAsync(result, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.True(res);
@@ -205,9 +216,11 @@ namespace RandomRepo.Tests
                 }
             };
             var result = await repo.AddRangeAsync(users, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Act
             var res = await repo.RemoveRangeAsync(result, new CancellationToken());
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.True(res);
