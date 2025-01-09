@@ -134,7 +134,7 @@ namespace RandomRepo.Tests
 
             // Act
             result.Username = "Test1234";
-            await repo.UpdateAsync(result, new CancellationToken());
+            repo.Update(result, new CancellationToken());
             await _context.SaveChangesAsync();
 
             // Assert
@@ -165,7 +165,7 @@ namespace RandomRepo.Tests
             // Act
             result.FirstOrDefault().Username = "Test1234";
             result.LastOrDefault().Username = "Test5678";
-            await repo.UpdateRangeAsync(result, new CancellationToken());
+            repo.UpdateRange(result, new CancellationToken());
             await _context.SaveChangesAsync();
 
             var first = await repo.GetFirstAsync(u => u.Id == 1, new CancellationToken());
@@ -189,7 +189,7 @@ namespace RandomRepo.Tests
             await _context.SaveChangesAsync();
 
             // Act
-            var res = await repo.RemoveAsync(result, new CancellationToken());
+            var res = repo.Remove(result, new CancellationToken());
             await _context.SaveChangesAsync();
 
             // Assert
@@ -219,7 +219,7 @@ namespace RandomRepo.Tests
             await _context.SaveChangesAsync();
 
             // Act
-            var res = await repo.RemoveRangeAsync(result, new CancellationToken());
+            var res = repo.RemoveRange(result, new CancellationToken());
             await _context.SaveChangesAsync();
 
             // Assert

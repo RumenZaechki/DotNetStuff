@@ -14,12 +14,12 @@ namespace RandomRepo.Async
 
         public Task<TEntity[]> AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken token);
 
-        public Task<bool> UpdateAsync(TEntity entity, CancellationToken token);
+        public bool Update(TEntity entity, CancellationToken token);
 
-        public Task<bool> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken token);
+        public bool UpdateRange(IEnumerable<TEntity> entities, CancellationToken token);
 
-        public Task<bool> RemoveAsync(TEntity entity, CancellationToken token);
+        public bool Remove(TEntity entity, CancellationToken token);
 
-        public Task<bool> RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken token);
+        public bool RemoveRange(IEnumerable<TEntity> entities, CancellationToken token);
     }
 }

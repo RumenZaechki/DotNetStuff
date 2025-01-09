@@ -45,25 +45,25 @@ namespace RandomRepo.Async
             return await _entity.FirstOrDefaultAsync(filter, token);
         }
 
-        public async Task<bool> RemoveAsync(TEntity entity, CancellationToken token)
+        public bool Remove(TEntity entity, CancellationToken token)
         {
             _entity.Remove(entity);
             return Context.Entry(entity).State == EntityState.Deleted;
         }
 
-        public async Task<bool> RemoveRangeAsync(IEnumerable<TEntity> entities, CancellationToken token)
+        public bool RemoveRange(IEnumerable<TEntity> entities, CancellationToken token)
         {
             _entity.RemoveRange(entities);
             return entities.Any(e => Context.Entry(e).State == EntityState.Deleted);
         }
 
-        public async Task<bool> UpdateAsync(TEntity entity, CancellationToken token)
+        public bool Update(TEntity entity, CancellationToken token)
         {
             _entity.Update(entity);
             return Context.Entry(entity).State == EntityState.Modified;
         }
 
-        public async Task<bool> UpdateRangeAsync(IEnumerable<TEntity> entities, CancellationToken token)
+        public bool UpdateRange(IEnumerable<TEntity> entities, CancellationToken token)
         {
             _entity.UpdateRange(entities);
             return entities.Any(e => Context.Entry(e).State == EntityState.Modified);
