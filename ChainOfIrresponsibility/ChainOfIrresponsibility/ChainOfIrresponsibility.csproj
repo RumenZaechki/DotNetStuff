@@ -5,7 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Title>Chain of Irresponsibility</Title>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Random Dude</Authors>
 		<Description>A simple library which implements the Chain of Responsibility patttern.</Description>
 		<Copyright>MIT</Copyright>
