@@ -74,11 +74,6 @@ namespace ChainOfIrresponsibility
         {
             ConstructorInfo[] constructors = linkType.GetConstructors();
 
-            // if (constructors.Length == 0)
-            // {
-            //     throw new InvalidOperationException($"No public constructors found for type '{linkType.FullName}'.");
-            // }
-
             if (constructors.Length > 1)
             {
                 throw new InvalidOperationException($"Multiple public constructors found for type '{linkType.FullName}'.");
