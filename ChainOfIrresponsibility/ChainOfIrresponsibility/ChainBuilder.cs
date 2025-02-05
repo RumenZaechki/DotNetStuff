@@ -14,13 +14,18 @@ namespace ChainOfIrresponsibility
 
         public ChainBuilder(IServiceCollection serviceCollection) : this(new Lazy<IServiceProvider>(serviceCollection.BuildServiceProvider)) { }
 
-        public ChainBuilder(IServiceProvider serviceProvider) : this(new Lazy<IServiceProvider>(() => serviceProvider)) { }
-
         private ChainBuilder(Lazy<IServiceProvider> serviceProvider)
         {
             _linkBuilders = new Stack<Func<T, T>>();
             _serviceProvider = serviceProvider;
         }
+
+
+        /// <summary>
+        /// Adds a new link of type <typeparamref name="TLink"/> to the chain.
+        /// </summary>
+        /// <typeparam name="TLink">The type of the chain link.</typeparam>
+        /// <returns>The updated chain builder.</returns>
 
         public IChainBuilder<T> WithLink<TLink>() where TLink : T
         {
@@ -38,6 +43,11 @@ namespace ChainOfIrresponsibility
             return this;
         }
 
+        /// <summary>
+        /// Adds a collection of links of to the chain.
+        /// </summary>
+        /// <typeparam name="IEnumerable<Type>">The collection of types of the chain link.</typeparam>
+        /// <returns>The updated chain builder.</returns>
         public IChainBuilder<T> WithLinks(IEnumerable<Type> types)
         {
             foreach (Type type in types)
@@ -64,14 +74,14 @@ namespace ChainOfIrresponsibility
         {
             ConstructorInfo[] constructors = linkType.GetConstructors();
 
-            if (constructors.Length == 0)
-            {
-                throw new ArgumentException($"No public constructors found for type '{linkType.FullName}'.");
-            }
+            // if (constructors.Length == 0)
+            // {
+            //     throw new InvalidOperationException($"No public constructors found for type '{linkType.FullName}'.");
+            // }
 
             if (constructors.Length > 1)
             {
-                throw new ArgumentException($"Multiple public constructors found for type '{linkType.FullName}'.");
+                throw new InvalidOperationException($"Multiple public constructors found for type '{linkType.FullName}'.");
             }
 
             ConstructorInfo constructor = constructors.Single();
@@ -80,7 +90,7 @@ namespace ChainOfIrresponsibility
             {
                 if (parameterInfo.ParameterType == typeof(T))
                 {
-                    return nextLink ?? throw new ArgumentException($"Final link of type '{linkType.FullName}' expects next link in constructor, but no link was provided."); ;
+                    return nextLink ?? throw new InvalidOperationException($"Final link of type '{linkType.FullName}' expects next link in constructor, but no link was provided."); ;
                 }
 
                 return _serviceProvider.Value.GetRequiredService(parameterInfo.ParameterType);

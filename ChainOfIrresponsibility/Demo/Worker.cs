@@ -1,4 +1,6 @@
-﻿using Demo.Chain;
+﻿using ChainOfIrresponsibility;
+using Demo.Chain;
+using Demo.Chain3;
 using Microsoft.Extensions.Hosting;
 
 namespace Demo
@@ -13,6 +15,12 @@ namespace Demo
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             await _chain.ExecuteAsync(new RandomRequest(), stoppingToken);
+
+            var chain3 = new ChainBuilder<IChain3>()
+                                        .WithLinks(new List<Type>() { typeof(RandomHandler), typeof(AnotherRandomHandler) })
+                                        .Build();
+                                        
+            await chain3.ExecuteAsync(new YetAnotherRandomRequest(), stoppingToken);
         }
     }
 }
