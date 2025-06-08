@@ -1,9 +1,9 @@
 ﻿namespace Demo.Chain
 {
-    public class RandomSuccessor : IChain
+    public class RandomSuccessor : IChain1
     {
-        private IChain _next;
-        public RandomSuccessor(IChain next)
+        private IChain1 _next;
+        public RandomSuccessor(IChain1 next)
         {
             _next = next;
         }

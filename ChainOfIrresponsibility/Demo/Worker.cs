@@ -7,8 +7,8 @@ namespace Demo
 {
     public class Worker : BackgroundService
     {
-        private readonly IChain _chain;
-        public Worker(IChain chain)
+        private readonly IChain1 _chain;
+        public Worker(IChain1 chain)
         {
             _chain = chain;
         }

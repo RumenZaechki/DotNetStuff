@@ -2,12 +2,12 @@
 
 namespace Demo.Chain
 {
-    public class AnotherRandomSuccessor : IChain
+    public class AnotherRandomSuccessor : IChain1
     {
-        private readonly IChain _next;
+        private readonly IChain1 _next;
 
         private readonly IChain2 _otherChain;
-        public AnotherRandomSuccessor(IChain next, IChain2 otherChain)
+        public AnotherRandomSuccessor(IChain1 next, IChain2 otherChain)
         {
             _next = next;
             _otherChain = otherChain;

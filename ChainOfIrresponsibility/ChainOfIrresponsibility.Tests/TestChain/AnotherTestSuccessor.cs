@@ -2,9 +2,10 @@
 {
     public class AnotherTestSuccessor : IChain
     {
-        public async Task HandleAsync(TestRequest request, CancellationToken token)
+        public Task HandleAsync(TestRequest request, CancellationToken token)
         {
             request.Logs.Add("logging from AnotherTestSuccessor");
+            return Task.CompletedTask;
         }
     }
 }

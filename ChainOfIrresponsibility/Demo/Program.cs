@@ -18,7 +18,7 @@ namespace Demo
                 .ConfigureServices((hostContext, services) =>
                 {
                     services
-                            .AddChain<IChain>()
+                            .AddChain<IChain1>()
                             .WithLink<RandomSuccessor>()
                             .WithLink<AnotherRandomSuccessor>()
                             .WithLink<YetAnotherRandomSuccessor>();

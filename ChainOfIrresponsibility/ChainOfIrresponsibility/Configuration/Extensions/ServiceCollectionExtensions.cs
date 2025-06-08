@@ -1,5 +1,6 @@
 ﻿using ChainOfIrresponsibility.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ChainOfIrresponsibility.Configuration.Extensions
 {
@@ -11,8 +12,8 @@ namespace ChainOfIrresponsibility.Configuration.Extensions
         {
             IChainBuilder<T> builder = new ChainBuilder<T>(services);
             
-            services.Add(new ServiceDescriptor(typeof(IChainBuilder<T>), _ => builder,  ServiceLifetime.Singleton));
-            services.Add(new ServiceDescriptor(typeof(T), _ => builder.Build(),  chainServiceLifetime));
+            services.TryAdd(new ServiceDescriptor(typeof(IChainBuilder<T>), _ => builder,  ServiceLifetime.Singleton));
+            services.TryAdd(new ServiceDescriptor(typeof(T), _ => builder.Build(),  chainServiceLifetime));
 
             return builder;
         }
